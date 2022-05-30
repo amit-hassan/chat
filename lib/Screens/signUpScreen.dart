@@ -1,3 +1,4 @@
+import 'package:chat/Screens/loginScreen.dart';
 import 'package:flutter/material.dart';
 
 import '../Helper/method_helper.dart';
@@ -128,6 +129,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 isLoading = false;
               });
               print("Account Created Successfully");
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => LoginScreen()));
             } else {
               print("Login Failed");
               setState(() {

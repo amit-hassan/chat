@@ -1,6 +1,9 @@
 import 'package:chat/Screens/signUpScreen.dart';
 import 'package:flutter/material.dart';
 
+import '../Helper/method_helper.dart';
+import 'homeScreen.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -106,7 +109,30 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget customButton(Size size) {
     return GestureDetector(
       onTap: () {
+        if (_email.text.isNotEmpty && _password.text.isNotEmpty) {
+          setState(() {
+            isLoading = true;
+          });
 
+          logIn(_email.text, _password.text).then((user) {
+            if (user != null) {
+              print("Login Successfully");
+              setState(() {
+                isLoading = false;
+              });
+              print("Login Successfully");
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => HomeScreen()));
+            } else {
+              print("Login Failed");
+              setState(() {
+                isLoading = false;
+              });
+            }
+          });
+        } else {
+          print("Please fill form correctly");
+        }
       },
       child: Container(
           height: size.height / 14,

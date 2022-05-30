@@ -1,4 +1,6 @@
+import 'package:chat/Screens/loginScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 Future<User?> signUp(String name, String email, String password) async{
 
@@ -24,7 +26,7 @@ Future<User?> signUp(String name, String email, String password) async{
 
 }
 
-Future<User?> login(String email, String password) async {
+Future<User?> logIn(String email, String password) async {
   FirebaseAuth _auth = FirebaseAuth.instance;
   try{
     User? user = (await _auth.signInWithEmailAndPassword(
@@ -44,11 +46,13 @@ Future<User?> login(String email, String password) async {
   }
 }
 
-Future logOut() async {
+Future logOut(BuildContext context) async {
   FirebaseAuth _auth = FirebaseAuth.instance;
 
   try {
-    await _auth.signOut();
+    await _auth.signOut().then((value) {
+      Navigator.push(context, MaterialPageRoute(builder: (_) => LoginScreen()));
+    });
   } catch (e) {
     print(e);
   }
