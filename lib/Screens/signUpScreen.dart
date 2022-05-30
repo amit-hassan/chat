@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../Helper/method_helper.dart';
+
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
 
@@ -113,7 +115,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget customButton(Size size) {
     return GestureDetector(
       onTap: () {
+        if (_name.text.isNotEmpty &&
+            _email.text.isNotEmpty &&
+            _password.text.isNotEmpty) {
+          setState(() {
+            isLoading = true;
+          });
 
+          signUp(_name.text, _email.text, _password.text).then((user) {
+            if (user != null) {
+              setState(() {
+                isLoading = false;
+              });
+              print("Account Created Successfully");
+            } else {
+              print("Login Failed");
+              setState(() {
+                isLoading = false;
+              });
+            }
+          });
+        } else {
+          print("Please enter Fields");
+        }
       },
       child: Container(
           height: size.height / 14,
