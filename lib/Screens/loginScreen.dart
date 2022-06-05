@@ -92,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     onTap: () => Navigator.of(context).push(
                         MaterialPageRoute(builder: (_) => const SignUpScreen())),
                     child: const Text(
-                      "Create Account",
+                      "Sign Up",
                       style: TextStyle(
                         color: Colors.blue,
                         fontSize: 16,
